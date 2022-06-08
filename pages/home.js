@@ -1,14 +1,15 @@
 import { useState } from 'react'
-import LoadMore from 'components/LoadMore'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 import NewTweet from 'components/NewTweet'
 import Tweets from 'components/Tweets'
 import prisma from 'lib/prisma'
 import { getTweets } from 'lib/data.js'
+import LoadMore from 'components/LoadMore'
 
 export default function Home({ initialTweets }) {
   const [tweets, setTweets] = useState(initialTweets)
+
   const router = useRouter()
   const { data: session, status } = useSession()
   const loading = status === 'loading'
@@ -18,15 +19,15 @@ export default function Home({ initialTweets }) {
   }
 
   if (!session) {
-    return router.push('/')
+    router.push('/')
   }
 
   if (session && !session.user.name) {
     router.push('/setup')
   }
-
+  console.log(tweets, initialTweets)
   return (
-    //  These are fragments <> </>
+    //This is a react fragment
     <>
       <NewTweet tweets={tweets} setTweets={setTweets} />
       <Tweets tweets={tweets} />

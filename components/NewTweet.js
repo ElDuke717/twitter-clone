@@ -6,7 +6,7 @@ export default function NewTweet({ tweets, setTweets }) {
   const [content, setContent] = useState('')
   const { data: session } = useSession()
   const router = useRouter()
-
+  console.log(tweets)
   if (!session) return null
 
   return (
@@ -30,13 +30,11 @@ export default function NewTweet({ tweets, setTweets }) {
         })
 
         const tweet = await res.json()
-
+        console.log(tweets)
         setTweets([tweet, ...tweets])
 
         setContent('')
 
-        // will refresh the page, along with the addition of aysnc/await above.  Window is the global object. Location exposes API to change the URL.
-        // it lets you get data from the current URL.  Executed asynchronously after the lines above.
         //router.reload(window.location.pathname)
       }}
     >
@@ -64,4 +62,3 @@ export default function NewTweet({ tweets, setTweets }) {
     </form>
   )
 }
-

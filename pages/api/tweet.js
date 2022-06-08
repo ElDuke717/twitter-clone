@@ -1,4 +1,4 @@
-import prisma from 'lib/prisma';
+import prisma from 'lib/prisma'
 import { getSession } from 'next-auth/react'
 
 export default async function handler(req, res) {
@@ -7,10 +7,7 @@ export default async function handler(req, res) {
 	}
 
 	const session = await getSession({ req })
-
-	if (!session) {
-		return res.status(401).json({ message: 'Not logged in' })
-	}
+	if (!session) return res.status(401).json({ message: 'Not logged in' })
 
 	const user = await prisma.user.findUnique({
 		where: {
@@ -18,9 +15,7 @@ export default async function handler(req, res) {
 		},
 	})
 
-	if (!user) {
-		return res.status(401).json({ message: 'User not found' })
-	}
+	if (!user) return res.status(401).json({ message: 'User not found' })
 
 	if (req.method === 'POST') {
 		const tweet = await prisma.tweet.create({
@@ -46,9 +41,10 @@ export default async function handler(req, res) {
 
 		res.end()
 	}
+
 	if (req.method === 'DELETE') {
 		const id = req.body.id
-
+		console.log(id)
 		const tweet = await prisma.tweet.findUnique({
 			where: {
 				id,
@@ -67,7 +63,6 @@ export default async function handler(req, res) {
 			where: { id },
 		})
 		res.status(200).end()
-
 		return
 	}
 }

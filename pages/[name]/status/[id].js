@@ -1,11 +1,11 @@
-import Tweet from 'components/Tweet'
-import Tweets from 'components/Tweets'
 import { getTweet, getReplies } from 'lib/data.js'
 import prisma from 'lib/prisma'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
+import Tweet from 'components/Tweet'
+import Tweets from 'components/Tweets'
 import NewReply from 'components/NewReply'
 
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 export default function SingleTweet({ tweet, replies }) {
   const { data: session, status } = useSession()
@@ -19,9 +19,8 @@ export default function SingleTweet({ tweet, replies }) {
     <div>
       <Tweet tweet={tweet} />
       <NewReply tweet={tweet} />
-      <Tweets tweets={replies} nolink={true} />
 
-      {session && session.user.name && (
+      {session && session.user.email === tweet.author.email && (
         <div className='flex-1 py-2 m-2 text-center'>
           <a
             href='#'
@@ -49,6 +48,8 @@ export default function SingleTweet({ tweet, replies }) {
           </a>
         </div>
       )}
+
+      <Tweets tweets={replies} nolink={true} />
     </div>
   )
 }
