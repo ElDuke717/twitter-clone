@@ -27,7 +27,6 @@ export default function Home({ initialTweets }) {
   }
   console.log(tweets, initialTweets)
   return (
-    //This is a react fragment
     <>
       <NewTweet tweets={tweets} setTweets={setTweets} />
       <Tweets tweets={tweets} />
@@ -35,16 +34,14 @@ export default function Home({ initialTweets }) {
     </>
   )
 }
-// This is a Next.js feature that gets called when the page is loaded
+
 export async function getServerSideProps() {
   let tweets = await getTweets(prisma, 2)
-  // This must be serialized to JSON - see Flavio's blog post https://flaviocopes.com/nextjs-serialize-date-json/ for more info.  
-  // then back to an object.
   tweets = JSON.parse(JSON.stringify(tweets))
 
   return {
     props: {
-      InitialTweets: tweets
-    }
+      initialTweets: tweets,
+    },
   }
 }
