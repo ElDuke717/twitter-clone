@@ -25,7 +25,7 @@ export default function Index({ tweets }) {
         <Link href='/api/auth/signin'>
           <a
             className='border px-8 py-2 mt-5 font-bold rounded-full color-accent-contrast bg-color-accent hover:bg-color-accent-hover-darker'
-            href='/api/auth/signin'
+
           >
             login
           </a>
