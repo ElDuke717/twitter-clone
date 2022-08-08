@@ -6,6 +6,7 @@
 It was built for learning purposes and for testing purposes.  It is mostly functional and will have updates added to it over time.
 
 To Do: 
+- Need to fix Vercel deployment - 
  - First try adding [colors](https://tailwindcss.com/docs/text-color) if you want. Implement [dark mode](https://tailwindcss.com/docs/dark-mode) too, if you like.
 - We currently don’t show the replies count in the tweets list. the only way to find out if a tweet has replies is to open the tweet. Fix this.
 - Detect if a user does not exist when displaying the profile
